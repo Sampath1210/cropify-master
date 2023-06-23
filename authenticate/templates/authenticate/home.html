@@ -1,0 +1,118 @@
+{% extends 'authenticate/base.html' %}
+
+{% block content %}
+
+<!-- <style>
+	body {
+		background-color: rgb(206, 206, 228);
+	}
+</style> -->
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<style>
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+	 }
+	 
+	 .row > div[class*='col-'] {
+	   display: flex;
+	 }
+</style>
+
+<!-- <h1>This is the home page</h1> -->
+
+{% if user.is_authenticated %}
+	
+	<!-- <p>Name: {{ user.first_name }} {{ user.last_name }}</p> -->
+	<!-- <p>Username: {{ user.username}}</p> -->
+	<!-- <p>Email: {{ user.email }}</p> -->
+	
+	<center><h2><u>Crop Prediction</u></h1></center><br>
+    <!-- <h3>Enter the form data</h3> -->
+    <div class="container">
+
+		<div class="col-md-6 offset-md-3" >
+			<form action="{% url 'result' %}">
+				{% csrf_token %}
+			  <div class="form-group">
+						  
+				<input type="text" class="form-control"  placeholder="Nitrogen (N)" required name="N"> <br>
+				<input type="text" class="form-control"  placeholder="Phosphorus (P)" required name="P"><br>
+				<input type="text" class="form-control"  placeholder="Potassium (K)" required name="K"><br>
+				<input type="text" class="form-control"  placeholder="pH" required name="ph"><br>
+				
+			  </div>
+			  <center><button type="submit" class="btn btn-secondary">Submit</button></center>
+			</form>
+		
+		</div>
+    <!-- <form >
+        {% csrf_token %}
+        N: <input type="text" required name="N"> <br> <br>
+        P: <input type="text" required name="P"> <br> <br>
+        K: <input type="text" required name="K"> <br> <br>
+        Temp: <input type="text" required name="temp"> <br> <br>
+        Hum: <input type="text" required name="hum"> <br> <br>
+        pH: <input type="text" required name="ph"> <br> <br>
+        rain: <input type="text" required name="rain"> <br> <br>
+        <input type="submit" name="" value="submit">
+    </form></div> -->
+
+{% else %}
+
+<!-- <h1>This page is under construction</h1> -->
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="card border-dark bg-transparent mb-3" style="max-width: 18rem;">
+					<div class="card-header">Step 1</div>
+					<div class="card-body text-dark">
+					  <h5 class="card-title">Authentication</h5>
+					  <p class="card-text">If you aren't registered, register and then proceed to login</p>
+					</div>
+				  </div>
+			</div>
+			<div class="col-sm-3">
+				<div class="card border-dark bg-transparent mb-3" style="max-width: 18rem;">
+					<div class="card-header">Step 2</div>
+					<div class="card-body text-dark">
+					  <h5 class="card-title">Requirements</h5>
+					  <p class="card-text">Enter few parameter values to begin the process. Temperature and Humiditity are 
+						  gathered in real time.
+					  </p>
+					</div>
+				  </div>
+			</div>
+			<div class="col-sm-3">
+				<div class="card border-dark bg-transparent mb-3" style="max-width: 18rem;">
+					<div class="card-header">Step 3</div>
+					<div class="card-body text-dark">
+					  <h5 class="card-title">ML Model Processing</h5>
+					  <p class="card-text">Our sophisticated model takes in your inputs and predicts the result with 99% accuracy.</p>
+					</div>
+				  </div>
+			</div>
+			<div class="col-sm-3">
+				<div class="card border-dark bg-transparent mb-3" style="max-width: 18rem;">
+					<div class="card-header">Step 4</div>
+					<div class="card-body text-dark">
+					  <h5 class="card-title">Get the result</h5>
+					  <p class="card-text">We suggest you to plant the predicted crop to get the optimum yield.</p>
+					</div>
+				  </div>
+			</div>
+		</div>
+	</div>
+	<br><br>
+	<div class="animate__animated animate__fadeInUp animate__repeat-1"><h1 style="font-size: 120px; text-align:center; color:white; text-shadow:2px 2px black;"><b>CROPIFY</b></h1></div>
+	<div class="animate__animated animate__fadeInDown animate__repeat-1"><h3 style="text-align:center; color:white; text-shadow:1px 1px rgb(3, 3, 3);"><i>Crop recommendation system</i></h3></div>
+</body>
+
+{% endif %}
+
+{% endblock %}
